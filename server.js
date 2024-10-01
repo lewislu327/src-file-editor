@@ -76,6 +76,16 @@ app.get('/api/download/:fileName', (req, res) => {
 });
 
 
+// Generate and send SRT file for download
+app.post("/api/download", (req, res) => {
+  const { subtitles, fileName } = req.body
+  const srtContent = formatSRT(subtitles)
+
+  res.setHeader("Content-Type", "text/srt")
+  res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`)
+  res.send(srtContent)
+})
+
 
 
 // The "catchall" handler: for any request that doesn't
@@ -84,7 +94,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"))
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
