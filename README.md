@@ -7,4 +7,4 @@
 
 ##### docker command
 - first time build: docker build -t srt-editor-app .
-- after built, use docker run -p 3000:3001 srt-editor-app to run service
+- after built, use docker run -p 3001:3001 srt-editor-app to run service
